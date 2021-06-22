@@ -1,0 +1,34 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_USER:  ${{secrets.DOCKER_USER}}
+      DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+    steps:
+      - name: Check out the repo 
+        uses: actions/checkout@v2
+      
+      - name: docker login
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag ppyasdf/helloworld:$(date +%s)
+      
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ppyasdf/helloworld:latest
