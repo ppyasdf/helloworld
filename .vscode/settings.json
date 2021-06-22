@@ -1,0 +1,8 @@
+{
+    "cloudcode.autoDependencies": "off",
+    "cloudcode.enableMinikubeGcpAuthPlugin": false,
+    "cloudcode.minikubeStatusBar": false,
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.pythonPath": "/usr/bin/python3"
+}
